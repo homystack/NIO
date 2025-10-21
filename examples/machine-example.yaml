@@ -1,0 +1,24 @@
+apiVersion: nixos.infra/v1alpha1
+kind: Machine
+metadata:
+  name: worker-01
+  namespace: default
+spec:
+  hostname: 192.168.139.196
+  sshUser: kitsunoff
+  sshPasswordSecretRef:
+    name: worker-password
+    namespace: default
+    key: password  # опционально, по умолчанию 'password'
+
+
+---
+# Пример секрета с паролем для Machine
+apiVersion: v1
+kind: Secret
+metadata:
+  name: worker-password
+  namespace: default
+type: Opaque
+stringData:
+  password: "111"
